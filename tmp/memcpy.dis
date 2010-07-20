@@ -1,0 +1,122 @@
+80015eea <memcpy>:
+ *
+ * You should not use this function to access IO space, use memcpy_toio()
+ * or memcpy_fromio() instead.
+ */
+void * memcpy(void * dest,const void *src,size_t count)
+{
+80015eea:       eb cd 40 80     pushm   r7,lr
+80015eee:       1a 97           mov     r7,sp
+80015ef0:       20 5d           sub     sp,20
+80015ef2:       ef 4c ff f4     st.w    r7[-12],r12
+80015ef6:       ef 4b ff f0     st.w    r7[-16],r11
+80015efa:       ef 4a ff ec     st.w    r7[-20],r10
+        char *tmp = (char *) dest, *s = (char *) src;
+80015efe:       ee f8 ff f4     ld.w    r8,r7[-12]
+80015f02:       ef 48 ff f8     st.w    r7[-8],r8
+80015f06:       ee f8 ff f0     ld.w    r8,r7[-16]
+80015f0a:       ef 48 ff fc     st.w    r7[-4],r8
+80015f0e:       c1 18           rjmp    80015f30 <memcpy+0x46>
+
+        while (count--)
+                *tmp++ = *s++;
+80015f10:       ee f8 ff fc     ld.w    r8,r7[-4]
+80015f14:       11 88           ld.ub   r8,r8[0x0]
+80015f16:       ee f9 ff f8     ld.w    r9,r7[-8]
+80015f1a:       b2 88           st.b    r9[0x0],r8
+80015f1c:       ee f8 ff f8     ld.w    r8,r7[-8]
+80015f20:       2f f8           sub     r8,-1
+80015f22:       ef 48 ff f8     st.w    r7[-8],r8
+80015f26:       ee f8 ff fc     ld.w    r8,r7[-4]
+80015f2a:       2f f8           sub     r8,-1
+80015f2c:       ef 48 ff fc     st.w    r7[-4],r8
+ */
+void * memcpy(void * dest,const void *src,size_t count)
+{
+        char *tmp = (char *) dest, *s = (char *) src;
+
+        while (count--)
+80015f30:       ee f8 ff ec     ld.w    r8,r7[-20]
+80015f34:       58 08           cp.w    r8,0
+80015f36:       5f 18           srne    r8
+80015f38:       f3 d8 c0 08     bfextu  r9,r8,0x0,0x8
+80015f3c:       ee f8 ff ec     ld.w    r8,r7[-20]
+80015f40:       20 18           sub     r8,1
+80015f42:       ef 48 ff ec     st.w    r7[-20],r8
+80015f46:       58 09           cp.w    r9,0
+80015f48:       ce 41           brne    80015f10 <memcpy+0x26>
+                *tmp++ = *s++;
+
+        return dest;
+80015f4a:       ee f8 ff f4     ld.w    r8,r7[-12]
+}
+80015f4e:       10 9c           mov     r12,r8
+80015f50:       2f bd           sub     sp,-20
+80015f52:       e3 cd 80 80     ldm     sp++,r7,pc
+112 /*
+113  * These two are only here because ALSA _thinks_ it needs them...
+114  */
+115 static inline void memcpy_fromio(void * to, const volatile void __iomem *from,
+116                                  unsigned long count)
+117 {
+118         char *p = to;
+119         while (count) {
+120                 count--;
+121                 *p = readb(from);
+122                 p++;
+123                 from++;
+124         }
+125 }
+126
+127 static inline void  memcpy_toio(volatile void __iomem *to, const void * from,
+128                                 unsigned long count)
+129 {
+130         const char *p = from;
+131         while (count) {
+132                 count--;
+133                 writeb(*p, to);
+134                 p++;
+135                 to++;
+136         }
+137 }
+
+
+ 27 /*http://lxr.falinux.com/source/include/asm-avr32/io.h#L39
+ 28  * Generic IO read/write.  These perform native-endian accesses.  Note
+ 29  * that some architectures will want to re-define __raw_{read,write}w.
+ 30  */
+ 31 extern void __raw_writesb(void __iomem *addr, const void *data, int bytelen);
+ 32 extern void __raw_writesw(void __iomem *addr, const void *data, int wordlen);
+ 33 extern void __raw_writesl(void __iomem *addr, const void *data, int longlen);
+ 34
+ 35 extern void __raw_readsb(const void __iomem *addr, void *data, int bytelen);
+ 36 extern void __raw_readsw(const void __iomem *addr, void *data, int wordlen);
+ 37 extern void __raw_readsl(const void __iomem *addr, void *data, int longlen);
+ 38
+ 39 static inline void writeb(unsigned char b, volatile void __iomem *addr)
+ 40 {
+ 41         *(volatile unsigned char __force *)addr = b;
+ 42 }
+ 43 static inline void writew(unsigned short b, volatile void __iomem *addr)
+ 44 {
+ 45         *(volatile unsigned short __force *)addr = b;
+ 46 }
+ 47 static inline void writel(unsigned int b, volatile void __iomem *addr)
+ 48 {
+ 49         *(volatile unsigned int __force *)addr = b;
+ 50 }
+ 51 #define __raw_writeb writeb
+ 52 #define __raw_writew writew
+ 53 #define __raw_writel writel
+ 54
+ 55 static inline unsigned char readb(const volatile void __iomem *addr)
+ 56 {
+ 57         return *(const volatile unsigned char __force *)addr;
+ 58 }
+ 59 static inline unsigned short readw(const volatile void __iomem *addr)
+ 60 {
+ 61         return *(const volatile unsigned short __force *)addr;
+ 62 }
+ 63 static inline unsigned int readl(const volatile void __iomem *addr)
+ 64 {
+ 65         return *(const volatile unsigned int __force *)addr;
