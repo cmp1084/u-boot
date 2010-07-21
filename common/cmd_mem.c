@@ -669,10 +669,11 @@ int do_mem_loopw (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
  */
 int do_mem_mtest (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 {
-	vu_long	*addr, *start, *end;
-	unsigned long	val;
-	unsigned long	readback;
-	int     rcode = 0;
+	vu_long * addr, * start, * end;
+	unsigned long val;
+	unsigned long readback;
+	int rcode;
+	rcode = 0;
 
 #if defined(CFG_ALT_MEMTEST)
 	vu_long	len;
@@ -685,10 +686,12 @@ int do_mem_mtest (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 #if defined(CFG_MEMTEST_SCRATCH)
 	vu_long *dummy = (vu_long*)CFG_MEMTEST_SCRATCH;
 #else
-	vu_long *dummy = 0;	/* yes, this is address 0x0, not NULL */
+	vu_long * dummy;
+	dummy = 0;	/* yes, this is address 0x0, not NULL */
 #endif
 	int	j;
-	int iterations = 1;
+	int iterations;
+	iterations = 1;
 
 	static const ulong bitpattern[] = {
 		0x00000001,	/* single bit */
@@ -932,7 +935,7 @@ int do_mem_mtest (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 			"\b\b\b\b\b\b\b\b\b\b",
 			pattern, "");
 
-		for (addr=start,val=pattern; addr<end; addr++) {
+		for (addr = start, val = pattern; addr < end; addr++) {
 			WATCHDOG_RESET();
 			*addr = val;
 			val  += incr;
@@ -940,11 +943,11 @@ int do_mem_mtest (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 		puts ("Reading...");
 
-		for (addr=start,val=pattern; addr<end; addr++) {
+		for (addr = start, val = pattern; addr < end; addr++) {
 			WATCHDOG_RESET();
 			readback = *addr;
 			if (readback != val) {
-				printf ("\nMem error @ 0x%08X: "
+				printf ("Mem error @ 0x%08X: "
 					"found %08lX, expected %08lX\n",
 					(unsigned int)addr, readback, val);
 				rcode = 1;

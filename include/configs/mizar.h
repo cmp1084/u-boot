@@ -140,6 +140,7 @@
 #define CONFIG_CMD_ASKENV
 #define CONFIG_CMD_DHCP
 #define CONFIG_CMD_MMC		//Added 20100716 Mjan
+#define CONFIG_CMD_FAT
 
 /* Remove these 'uneccessary' commands */
 #undef CONFIG_CMD_AUTOSCRIPT
@@ -148,19 +149,19 @@
 #undef CONFIG_CMD_XIMG
 
 /* Ethernet - RMII mode */
-//#define CONFIG_MACB				1
-//#define CONFIG_RMII				1
+//#define CONFIG_MACB			1
+//#define CONFIG_RMII			1
 
 #define CONFIG_ATMEL_USART		1
 #define CONFIG_ATMEL_SPI		1
-//~ #define CONFIG_GENERIC_MMC		1
+//~ #define CONFIG_GENERIC_MMC	1
 #define CONFIG_MMC				1
 #define CONFIG_SPI_MMC			1
 #define CONFIG_PORTMUX_GPIO		1
-//~ #define CFG_NR_PIOS				5	//Removed 20100716 Mjan
+//~ #define CFG_NR_PIOS			5	//Removed 20100716 Mjan
 #define CFG_SDRAMC				1
 
-//~ #define CFG_SMC					0	//Removed 20100716 Mjan
+//~ #define CFG_SMC				0	//Removed 20100716 Mjan
 //~ #undef CFG_SMC
 
 #define CFG_DCACHE_LINESZ		32
@@ -205,7 +206,7 @@
 #define CFG_LONGHELP			1
 
 #define CFG_MEMTEST_START		CFG_SDRAM_BASE
-#define CFG_MEMTEST_END			(CFG_MEMTEST_START + EBI_SDRAM_SIZE - 0x100000) // - 0x00100000) //TODO: Do the - 0x00100000 make sense?	//Was: (CFG_MEMTEST_START + 0x700000) 20100625 Mjan
+#define CFG_MEMTEST_END			(CFG_MEMTEST_START + EBI_SDRAM_SIZE >> 2) // - 0x00100000) //TODO: Do the - 0x00100000 make sense?	We dont want to overwrite u-boot during RAM-test  >> 2 test only a quarter of RAM//Was: (CFG_MEMTEST_START + 0x700000) 20100625 Mjan
 /* TODO: 57600 baud 20100624 Mjan */
 #define CFG_BAUDRATE_TABLE { 115200, 57600, 38400, 19200, 9600, 2400 }
 

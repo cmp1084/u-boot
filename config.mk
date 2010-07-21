@@ -114,7 +114,7 @@ endif
 RELFLAGS= $(PLATFORM_RELFLAGS)
 DBGFLAGS= -ggdb # -DDEBUG
 #20100624 added -ggdb Mjan
-OPTFLAGS= #-fomit-frame-pointer
+OPTFLAGS= -Os #-fomit-frame-pointer
 #OPTFLAGS= -Os #-fomit-frame-pointer Removed 20100624 Mjan but as -O0 was used warnings about input not relaxable and a undefined reference to __bad_dma_data_direction came up during compile. -O1 removed the undef. reference. -O2 removed the warnings about "not relaxable"
 ifndef LDSCRIPT
 #LDSCRIPT := $(TOPDIR)/board/$(BOARDDIR)/u-boot.lds.debug

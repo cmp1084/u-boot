@@ -22,7 +22,7 @@
  * MA 02111-1307 USA
  */
 
-/* TAKEN FROM BLACKFIN 2010.06 include/asm/arch-omap3 */
+/* TAKEN FROM BLACKFIN 2010.06 include/asm/arch-omap3 Added 201007xx Mjan, alot to fix */
 #ifndef MMC_H
 #define MMC_H
 
@@ -76,7 +76,7 @@
 #define MMC_INIT_SEQ_CLK		(MMC_CLOCK_REFERENCE * 1000 / 80)
 #define MMC_400kHz_CLK			(MMC_CLOCK_REFERENCE * 1000 / 400)
 #define CLKDR(r, f, u)			((((r)*100) / ((f)*(u))) + 1)
-#define CLKD(f, u)			(CLKDR(MMC_CLOCK_REFERENCE, f, u))
+#define CLKD(f, u)				(CLKDR(MMC_CLOCK_REFERENCE, f, u))
 
 #define MMC_OCR_REG_ACCESS_MODE_MASK	(0x3 << 29)
 #define MMC_OCR_REG_ACCESS_MODE_BYTE 	(0x0 << 29)
@@ -91,7 +91,7 @@
 #define MMC_SD2_CSD_C_SIZE_MSB_OFFSET	16
 #define MMC_CSD_C_SIZE_LSB_MASK		0x0003
 #define MMC_CSD_C_SIZE_MSB_MASK		0x03FF
-#define MMC_CSD_C_SIZE_MSB_OFFSET	2
+#define MMC_CSD_C_SIZE_MSB_OFFSET		2
 
 #define MMC_CSD_TRAN_SPEED_UNIT_MASK	(0x07 << 0)
 #define MMC_CSD_TRAN_SPEED_FACTOR_MASK	(0x0F << 3)

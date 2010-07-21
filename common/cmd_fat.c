@@ -39,10 +39,10 @@ int do_fat_fsload (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 	unsigned long offset;
 	unsigned long count;
 	char buf [12];
-	block_dev_desc_t *dev_desc=NULL;
+	block_dev_desc_t * dev_desc=NULL;
 	int dev=0;
 	int part=1;
-	char *ep;
+	char * ep;
 
 	if (argc < 5) {
 		printf ("usage: fatload <interface> <dev[:part]> <addr> <filename> [bytes]\n");

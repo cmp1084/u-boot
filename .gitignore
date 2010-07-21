@@ -13,7 +13,7 @@
 *~
 *.swp
 *.patch
-
+*.geany
 #
 # Top-level generic files
 #

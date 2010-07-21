@@ -101,7 +101,7 @@ int mmc_init(int verbose)
 		printf("mmc_init\n");
 
 	spi_init();
-	/* this meeds to be done twice */
+	/* this needs to be done twice */
 	mmc_hw_init();
 	udelay(1000);
 	mmc_hw_init();

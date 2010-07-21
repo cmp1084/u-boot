@@ -156,7 +156,7 @@ int do_mmcinfo (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 
 U_BOOT_CMD(mmcinfo, 2, 0, do_mmcinfo,
 	"mmcinfo <dev num>-- display MMC info",
-	""
+	"MMC long info not available"
 );
 
 int do_mmcops(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
@@ -180,8 +180,8 @@ int do_mmcops(cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
 	case 0:
 	case 1:
 	case 4:
-		printf("Err\n");
-		//~ cmd_usage(cmdtp);
+		//~ printf("Err\n");
+		cmd_usage(cmdtp);
 		return 1;
 
 	case 2:

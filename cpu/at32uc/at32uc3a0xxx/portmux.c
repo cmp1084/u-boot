@@ -229,6 +229,7 @@ void portmux_enable_spi0(unsigned long cs_mask, unsigned long drive_strength)
 
 void portmux_enable_spi1(unsigned long cs_mask, unsigned long drive_strength)
 {
+	//TODO: drive_strength is not used,
 	unsigned long pin_mask;
 
 	/* MOSI and SCK */

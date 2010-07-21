@@ -26,8 +26,8 @@
 #include <ide.h>
 
 typedef struct block_dev_desc {
-	int		if_type;	/* type of the interface */
-	int		dev;		/* device number */
+	int				if_type;	/* type of the interface */
+	int				dev;		/* device number */
 	unsigned char	part_type;	/* partition type */
 	unsigned char	target;		/* target SCSI ID */
 	unsigned char	lun;		/* target LUN */
@@ -38,9 +38,9 @@ typedef struct block_dev_desc {
 #endif
 	lbaint_t		lba;		/* number of blocks */
 	unsigned long	blksz;		/* block size */
-	char		vendor [40+1];	/* IDE model, SCSI Vendor */
-	char		product[20+1];	/* IDE Serial no, SCSI product */
-	char		revision[8+1];	/* firmware revision */
+	char			vendor [40+1];	/* IDE model, SCSI Vendor */
+	char			product[20+1];	/* IDE Serial no, SCSI product */
+	char			revision[8+1];	/* firmware revision */
 	unsigned long	(*block_read)(int dev,
 				      unsigned long start,
 				      lbaint_t blkcnt,
@@ -53,15 +53,15 @@ typedef struct block_dev_desc {
 }block_dev_desc_t;
 
 /* Interface types: */
-#define IF_TYPE_UNKNOWN		0
+#define IF_TYPE_UNKNOWN	0
 #define IF_TYPE_IDE		1
-#define IF_TYPE_SCSI		2
-#define IF_TYPE_ATAPI		3
+#define IF_TYPE_SCSI	2
+#define IF_TYPE_ATAPI	3
 #define IF_TYPE_USB		4
 #define IF_TYPE_DOC		5
 #define IF_TYPE_MMC		6
 #define IF_TYPE_SD		7
-#define IF_TYPE_SATA		8
+#define IF_TYPE_SATA	8
 
 /* Part types */
 #define PART_TYPE_UNKNOWN	0x00
@@ -92,18 +92,18 @@ typedef struct disk_partition {
 } disk_partition_t;
 
 /* Misc _get_dev functions */
-block_dev_desc_t* get_dev(char* ifname, int dev);
-block_dev_desc_t* ide_get_dev(int dev);
-block_dev_desc_t* sata_get_dev(int dev);
-block_dev_desc_t* scsi_get_dev(int dev);
-block_dev_desc_t* usb_stor_get_dev(int dev);
-block_dev_desc_t* mmc_get_dev(int dev);
-block_dev_desc_t* systemace_get_dev(int dev);
+block_dev_desc_t * get_dev(char* ifname, int dev);
+block_dev_desc_t * ide_get_dev(int dev);
+block_dev_desc_t * sata_get_dev(int dev);
+block_dev_desc_t * scsi_get_dev(int dev);
+block_dev_desc_t * usb_stor_get_dev(int dev);
+block_dev_desc_t * mmc_get_dev(int dev);
+block_dev_desc_t * systemace_get_dev(int dev);
 
 /* disk/part.c */
 int get_partition_info (block_dev_desc_t * dev_desc, int part, disk_partition_t *info);
 void print_part (block_dev_desc_t *dev_desc);
-void  init_part (block_dev_desc_t *dev_desc);
+void init_part (block_dev_desc_t *dev_desc);
 void dev_print(block_dev_desc_t *dev_desc);
 
 
@@ -111,7 +111,7 @@ void dev_print(block_dev_desc_t *dev_desc);
 /* disk/part_mac.c */
 int get_partition_info_mac (block_dev_desc_t * dev_desc, int part, disk_partition_t *info);
 void print_part_mac (block_dev_desc_t *dev_desc);
-int   test_part_mac (block_dev_desc_t *dev_desc);
+int test_part_mac (block_dev_desc_t *dev_desc);
 #endif
 
 #ifdef CONFIG_DOS_PARTITION
@@ -125,14 +125,14 @@ int   test_part_dos (block_dev_desc_t *dev_desc);
 /* disk/part_iso.c */
 int get_partition_info_iso (block_dev_desc_t * dev_desc, int part, disk_partition_t *info);
 void print_part_iso (block_dev_desc_t *dev_desc);
-int   test_part_iso (block_dev_desc_t *dev_desc);
+int test_part_iso (block_dev_desc_t *dev_desc);
 #endif
 
 #ifdef CONFIG_AMIGA_PARTITION
 /* disk/part_amiga.c */
 int get_partition_info_amiga (block_dev_desc_t * dev_desc, int part, disk_partition_t *info);
 void print_part_amiga (block_dev_desc_t *dev_desc);
-int   test_part_amiga (block_dev_desc_t *dev_desc);
+int test_part_amiga (block_dev_desc_t *dev_desc);
 #endif
 
 #endif /* _PART_H */

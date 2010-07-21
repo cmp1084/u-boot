@@ -18,26 +18,26 @@
 #define ATMEL_SPI_CR_SPIEN		(1 << 0)
 #define ATMEL_SPI_CR_SPIDIS		(1 << 1)
 #define ATMEL_SPI_CR_SWRST		(1 << 7)
-#define ATMEL_SPI_CR_LASTXFER		(1 << 24)
+#define ATMEL_SPI_CR_LASTXFER	(1 << 24)
 
 /* Bits in MR */
 #define ATMEL_SPI_MR_MSTR		(1 << 0)
 #define ATMEL_SPI_MR_PS			(1 << 1)
 #define ATMEL_SPI_MR_PCSDEC		(1 << 2)
 #define ATMEL_SPI_MR_FDIV		(1 << 3)
-#define ATMEL_SPI_MR_MODFDIS		(1 << 4)
+#define ATMEL_SPI_MR_MODFDIS	(1 << 4)
 #define ATMEL_SPI_MR_LLB		(1 << 7)
 #define ATMEL_SPI_MR_PCS(x)		(((x) & 15) << 16)
-#define ATMEL_SPI_MR_DLYBCS(x)		((x) << 24)
+#define ATMEL_SPI_MR_DLYBCS(x)	((x) << 24)
 
 /* Bits in RDR */
 #define ATMEL_SPI_RDR_RD(x)		(x)
-#define ATMEL_SPI_RDR_PCS(x)		((x) << 16)
+#define ATMEL_SPI_RDR_PCS(x)	((x) << 16)
 
 /* Bits in TDR */
 #define ATMEL_SPI_TDR_TD(x)		(x)
-#define ATMEL_SPI_TDR_PCS(x)		((x) << 16)
-#define ATMEL_SPI_TDR_LASTXFER		(1 << 24)
+#define ATMEL_SPI_TDR_PCS(x)	((x) << 16)
+#define ATMEL_SPI_TDR_LASTXFER	(1 << 24)
 
 /* Bits in SR/IER/IDR/IMR */
 #define ATMEL_SPI_SR_RDRF		(1 << 0)
@@ -49,18 +49,18 @@
 #define ATMEL_SPI_SR_RXBUFF		(1 << 6)
 #define ATMEL_SPI_SR_TXBUFE		(1 << 7)
 #define ATMEL_SPI_SR_NSSR		(1 << 8)
-#define ATMEL_SPI_SR_TXEMPTY		(1 << 9)
+#define ATMEL_SPI_SR_TXEMPTY	(1 << 9)
 #define ATMEL_SPI_SR_SPIENS		(1 << 16)
 
 /* Bits in CSRx */
 #define ATMEL_SPI_CSRx_CPOL		(1 << 0)
-#define ATMEL_SPI_CSRx_NCPHA		(1 << 1)
-#define ATMEL_SPI_CSRx_CSAAT		(1 << 3)
-#define ATMEL_SPI_CSRx_BITS(x)		((x) << 4)
-#define ATMEL_SPI_CSRx_SCBR(x)		((x) << 8)
-#define ATMEL_SPI_CSRx_SCBR_MAX		0xff
-#define ATMEL_SPI_CSRx_DLYBS(x)		((x) << 16)
-#define ATMEL_SPI_CSRx_DLYBCT(x)	((x) << 24)
+#define ATMEL_SPI_CSRx_NCPHA	(1 << 1)
+#define ATMEL_SPI_CSRx_CSAAT	(1 << 3)
+#define ATMEL_SPI_CSRx_BITS(x)	((x) << 4)
+#define ATMEL_SPI_CSRx_SCBR(x)	((x) << 8)
+#define ATMEL_SPI_CSRx_SCBR_MAX	0xff
+#define ATMEL_SPI_CSRx_DLYBS(x)	((x) << 16)
+#define ATMEL_SPI_CSRx_DLYBCT(x) ((x) << 24)
 
 /* Bits in VERSION */
 #define ATMEL_SPI_VERSION_REV(x)	((x) << 0)
@@ -79,11 +79,11 @@
 
 struct atmel_spi_slave {
 	struct spi_slave slave;
-	void		*regs;
-	u32		mr;
+	void * regs;
+	u32 mr;
 };
 
-static inline struct atmel_spi_slave *to_atmel_spi(struct spi_slave *slave)
+static inline struct atmel_spi_slave * to_atmel_spi(struct spi_slave *slave)
 {
 	return container_of(slave, struct atmel_spi_slave, slave);
 }

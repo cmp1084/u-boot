@@ -47,8 +47,7 @@ void portmux_select_peripheral(void * port, unsigned long pin_mask,	enum portmux
 			gpio_writel(port, PMR1S, pin_mask);
 			break;
 		default:
-			printf("Err: cpu/at32uc/portmux-gpio.c:%i", __LINE__);
-			while(1);
+			printf("Err: %s:%i", __FILE__, __LINE__);
 			break;
 	}
 
